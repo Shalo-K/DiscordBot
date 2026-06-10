@@ -1,0 +1,8 @@
+services:
+  bot:
+    build: .
+    container_name: anin-bot
+    env_file: .env
+    volumes: 
+      - ./app/conf:/app/conf
+    restart: unless-stopped

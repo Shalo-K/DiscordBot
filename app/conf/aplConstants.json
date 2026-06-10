@@ -1,0 +1,32 @@
+{
+    "mode":{
+        "NORMAL" : "0"
+        ,"DEBUG" : "9"
+    }
+    
+    ,"cogs":[
+        "clanBattleManager"
+        ,"commonCreatedMessageManager"
+        ,"commonReactionManager"
+    ]
+        
+    ,"reaction":{
+        "x"                        : "❌"
+        ,"crossed_swords"          : "⚔"
+        ,"mage"                    : "🧙"
+        ,"ballot_box_with_check"   : "☑"
+        ,"arrows_counterclockwise" : "🔄"
+        ,"wrench"                  : "🔧"
+        ,"coffee"                  : "☕"
+        ,"star"                    : "⭐"
+        ,"thumbsup"                : "👍"
+        ,"thinking"                : "🤔"
+    }
+
+    ,"message":{
+        "channelId"     : "チャンネルID："
+        ,"messageId"    : "メッセージID："
+        ,"reactionList" : "リアクション一覧"
+        ,"noReaction"   : "未回答"
+    }
+}

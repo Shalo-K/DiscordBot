@@ -2,6 +2,7 @@
 import datetime
 import enum
 import os
+from pathlib import Path
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -9,13 +10,12 @@ from discord.ext import commands
 ##### util #####
 from util import discordUtil
 from util import formatUtil
-from util.fileController import AplConst
-from util.fileController import ExtraConfig
 
 ##### configの読み込み #####
-aplPath = os.getcwd()
-aplConst = AplConst(aplPath)
-exConf = ExtraConfig(aplPath, "aplConstantsForClanBattle")
+from bot.confing import loadAplConst, loadExConf
+aplPath = Path(__file__).resolve().parents[1]
+aplConst = loadAplConst()
+exConf = loadExConf("aplConstantsForClanBattle")
 
 
 ##### コマンドパラメータ用のEnum #####

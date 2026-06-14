@@ -3,11 +3,10 @@ import os
 import asyncio
 import discord
 from discord.ext import commands
-from util.fileController import AplConst
+from bot.confing import loadAplConst
 
 ##### configの読み込み #####
-aplPath = os.getcwd()
-aplConst = AplConst(aplPath)
+aplConst = loadAplConst()
 
 ##### Cog一覧取得　 #####
 cogs = aplConst.get("cogs")

@@ -1,15 +1,13 @@
 ###### import #####
-import os
 import discord
 from discord.ext import commands
 
 ##### util #####
 from util import discordUtil
-from util.fileController import AplConst
 
 ##### configの読み込み #####
-aplPath = os.getcwd()
-aplConst = AplConst(aplPath)
+from bot.confing import loadAplConst
+aplConst = loadAplConst()
 
 
 class CommonCreatedMessageManager(commands.Cog):

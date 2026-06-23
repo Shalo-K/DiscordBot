@@ -11,7 +11,7 @@ def loadAplConst() -> AplConst:
 
     Returns
     -------
-    ExtraConfig : Dict Config情報
+    AplConst : Dict Config情報
     '''
     return AplConst(str(BASE_DIR))
 

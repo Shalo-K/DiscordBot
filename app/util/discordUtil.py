@@ -2,6 +2,10 @@
 import discord
 import datetime
 
+##### configの読み込み #####
+from bot.config import loadAplConst
+aplConst = loadAplConst()
+
 def getChannelByName(guild, channelName):
     '''
     チャンネル名からチャンネルのオブジェクトを取得する。
@@ -262,4 +266,31 @@ def getEmbedFieldIndexByName(embed, findName):
             result = i
             break
     
+    return result
+
+def addInline(text, rows = 1) -> str:
+    '''
+    指定したプレーンテキストにインライン文字列を付与する。
+    単一行用か複数行用かは指定可能(デフォルトは単一)
+
+    Parameters
+    ----------
+    text : String プレーンテキスト
+    rows : int 追加形式(1:単一行 2:複数行)
+
+    Returns
+    -------
+    result : String 付与後の文字列
+    '''
+    result = None
+
+    if type(rows) is int:
+        if rows == 1:
+            result = aplConst.get("message.inline") + text + aplConst.get("message.inline")
+        elif rows == 2:
+            result = aplConst.get("message.inlines") + text + aplConst.get("message.inlines")
+        else:
+            result = text
+    else:
+        result = text
     return result

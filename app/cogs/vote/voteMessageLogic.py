@@ -2,48 +2,45 @@
 import discord
 from discord.ext import commands
 
+##### base #####
+from cogs.base.baseMessageCog import BaseMessageCog
+
 ##### util #####
 from util import discordUtil
 
-##### configの読み込み #####
-from bot.confing import loadAplConst
+##### config #####
+from bot.config import loadAplConst
 aplConst = loadAplConst()
 
-
-class CommonCreatedMessageManager(commands.Cog):
+class VoteMessageLogic(BaseMessageCog):
     '''
-    メッセージ作成時の操作定義クラス
+    メッセージをトリガーとするイベントの処理クラス
+
+    Extends
+    ----------
+    BaseMessageCog(cogs.base.baseMessageCog)
 
     Attributes
     ----------
     bot : Bot bot自身のオブジェクト
     '''
-    def __init__(self, bot):
-        self.bot = bot
-    
-    async def mainLogic(self, message: discord.message):
+    def isTarget(self, message: discord.Message) -> bool:
+        # botへのメンションが含まれる場合、True
+        return discordUtil.includeMention(message, self.bot.user)
+
+    async def mainHandler(self, message: discord.message) -> None:
         '''
-        クラスのメインロジック
+        クラスのメインハンドラ
 
         Parameters
         ----------
-        message : message 作成されたメッセージの情報
-
-        Returns
-        -------
-        endFlag : 処理終了フラグ
+        message : message 処理対象メッセージの情報
         '''
-        endFlag = False
+        await self.createReactionListMessage(message)
 
-        if (discordUtil.includeMention(message, self.bot.user)):
-            ##### メッセージにbotへのメンションが含まれる場合 #####
-            # リアクション一覧の作成
-            await self.createReactionListMessage(message)
 
-        ##### 終了 #####
-        return endFlag
-
-    async def createReactionListMessage(self, message: discord.message):
+    ##### 詳細処理 #####
+    async def createReactionListMessage(self, message: discord.message) -> None:
         '''
         リアクションを集計するメッセージを作成する。
         作成するメッセージは元のメッセージに対してのリプライになる。
@@ -70,10 +67,10 @@ class CommonCreatedMessageManager(commands.Cog):
 
         # メッセージ文言の作成
         contentArray = [aplConst.get("message.reactionList")]
-        contentArray.append("```リアクションが未登録です```")
+        contentArray.append(discordUtil.addInline(aplConst.get("message.reactionZero"), 2))
         if (len(targetNames) > 0):
             contentArray.append(aplConst.get("message.noReaction"))
-            contentArray.append("```" + " ".join(targetNames) + "```")
+            contentArray.append(discordUtil.addInline(" ".join(targetNames), 2))
 
         # メッセージを送信
         await message.reply(content="\n".join(contentArray))
@@ -82,4 +79,4 @@ class CommonCreatedMessageManager(commands.Cog):
 ##### Cog読み込み時に実行されるメソッド #####
 async def setup(bot):
     # Botを渡してインスタンス化し、Botにコグとして登録する
-    await bot.add_cog(CommonCreatedMessageManager(bot))
+    await bot.add_cog(VoteMessageLogic(bot))

@@ -4,12 +4,18 @@
         ,"DEBUG" : "9"
     }
     
-    ,"cogs":[
-        "clanBattleManager"
-        ,"commonCreatedMessageManager"
-        ,"commonReactionManager"
-    ]
-        
+    ,"cogs": {
+        "vote": [
+            "voteMessageLogic"
+            ,"voteReactionLogic"
+        ]
+        ,"clan":[
+            "clanBattleCommandLogic"
+            ,"clanBattleReactionLogic"
+            ,"clanBattleMemberUpdateLogic"
+        ]
+    }
+    
     ,"reaction":{
         "x"                        : "❌"
         ,"crossed_swords"          : "⚔️"
@@ -26,7 +32,11 @@
     ,"message":{
         "channelId"     : "チャンネルID："
         ,"messageId"    : "メッセージID："
+        ,"inline"       : "`"
+        ,"inlines"      : "```"
         ,"reactionList" : "リアクション一覧"
         ,"noReaction"   : "未回答"
+        ,"reactionZero" : "該当者なし"
+        ,"reactionNoDefined" : "リアクションが未登録です"
     }
 }

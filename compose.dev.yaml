@@ -1,0 +1,17 @@
+services:
+  bot:
+    build:
+      context: .
+      args:
+        REQUIREMENTS: requirements-dev.txt
+    env_file:
+      - .env.dev
+    volumes:
+      - ./app:/app
+    ports:
+      - "5678:5678"
+    command: >
+      python -m debugpy
+      --listen 0.0.0.0:5678
+      --wait-for-client
+      main.py

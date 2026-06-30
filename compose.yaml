@@ -1,8 +1,13 @@
 services:
   bot:
-    build: .
+    build:
+      context: .
+      args:
+        REQUIREMENTS: requirements.txt
     container_name: anin-bot
     env_file: .env
+    environment:
+      - TZ=Asia/Tokyo
     volumes: 
       - ./app/conf:/app/conf
     restart: unless-stopped

@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 def datetimeFormat(target, format):
     '''
@@ -16,7 +17,7 @@ def datetimeFormat(target, format):
     '''
     result = None
     if (target == "now"):
-        dt = datetime.datetime.now()
+        dt = datetime.now(ZoneInfo("Asia/Tokyo"))
     else:
         # パラメータチェック
         if (len(target) != 14):

@@ -10,6 +10,7 @@ from discord.ext import commands
 
 ##### util #####
 from util import discordUtil
+from util import formatUtil
 
 ##### configの読み込み #####
 from bot.config import loadAplConst, loadExConf
@@ -185,7 +186,7 @@ class ClanBattleCommandLogic(commands.Cog):
                             )
                     
                     # csv出力
-                    timeStamp = datetime.datetime.now().strftime("_%Y%m%d%H%M%S")
+                    timeStamp = formatUtil.datetimeFormat("now", "_%Y%m%d%H%M%S")
                     fileName = "memory_" + target + timeStamp + ".csv"
                     outPath = tmpPath / fileName
                     await interaction.followup.send(content="全てのデータを取得完了。csv出力します。", ephemeral= True)
